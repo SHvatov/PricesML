@@ -7,12 +7,6 @@ At the moment WS supports the following requests:
 ```http request
 POST http://localhost:8080/data
 Content-Type: application/json
-
-{
-  "requestedProduct": string, // defines the query itself
-  "limit": int, optinal, // defines the max number of products to fetch 
-  "requestFrom": string // ALL, OKEY, LENTA - shop to fetch data from
-}
 ```
 
 ### Example
