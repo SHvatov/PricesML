@@ -3,7 +3,7 @@ Basic course project, which consists of bot, WS and a neural network.
 
 ## WS 
 ### Specs
-At the moment WS supports the following requests:
+At the moment WS supports the following request:
 ```http request
 POST http://localhost:8080/data
 Content-Type: application/json
