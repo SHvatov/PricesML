@@ -1,3 +1,5 @@
 .idea
 /prices-ws/*.iml
 /prices-ws/target
+/objects-detection/venv
+/objects-detection/.idea
