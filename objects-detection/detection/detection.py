@@ -50,4 +50,4 @@ def detect_object(image_path, i):
     return name
 
 
-#print(detect_objects("E:\python_proj\PricesML\objects-detection\detection\img\i16.jpg"))
+#print(detect_objects(""))
