@@ -19,7 +19,7 @@ CLASS_INDICES_PATH = 'class_indices.npy'
 TRAIN_DATASET_DIR = './ref-data/dataset/train'
 VALIDATION_DATASET_DIR = './ref-data/dataset/validation'
 
-EPOCHS_NUM = 2
+EPOCHS_NUM = 100
 
 BATCH_SIZE = 16
 
