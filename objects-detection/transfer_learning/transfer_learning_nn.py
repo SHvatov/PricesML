@@ -1,7 +1,6 @@
 import math
 import time
 import os
-import traceback
 
 import numpy as np
 from keras import applications
@@ -10,14 +9,16 @@ from keras.models import Sequential
 from keras.preprocessing.image import ImageDataGenerator, img_to_array, load_img
 from keras.utils.np_utils import to_categorical
 
+from cropping.cropping import crop_image
+
 IMG_SIZE = (348, 348)
 
 INIT_MODEL_WEIGHTS_PATH = 'initial_model.h5'
 INIT_MODEL_TRAIN_FEATURES_PATH = 'bottleneck_features_train.npy'
 INIT_MODEL_VALIDATION_FEATURES_PATH = 'bottleneck_features_validation.npy'
 CLASS_INDICES_PATH = 'class_indices.npy'
-TRAIN_DATASET_DIR = './ref-data/dataset/train'
-VALIDATION_DATASET_DIR = './ref-data/dataset/validation'
+TRAIN_DATASET_DIR = 'ref-data/dataset/train'
+VALIDATION_DATASET_DIR = 'ref-data/dataset/validation'
 
 EPOCHS_NUM = 100
 
@@ -107,7 +108,8 @@ def predict(image_path):
 
     num_classes = len(class_dictionary)
 
-    # todo: add image cropping
+    crop_image(image_path)
+
     image = load_img(image_path, target_size=IMG_SIZE)
     image = img_to_array(image)
 
