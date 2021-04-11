@@ -1,4 +1,7 @@
 .idea
+__pycache__/
+venv/
+env/
 /prices-ws/*.iml
 /prices-ws/target
 /objects-detection/venv
