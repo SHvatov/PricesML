@@ -6,6 +6,7 @@ from telegram import Update
 from telegram.ext import CallbackContext
 
 from objects_detection.prediction import predict
+from .utils import (get_keyboard, fetch_prices, format_content)
 from .types import CLASSES
 
 logger = logging.getLogger(__name__)
@@ -58,10 +59,46 @@ def image(update: Update, context: CallbackContext) -> None:
         label = predict(image_path)
         translation = CLASSES[label.lower()]
 
+        context.user_data['product'] = translation
+
         update.message.reply_text(
-            f'Здесь изображён {translation}, верно?'
+            f'Здесь изображён {translation}, верно?',
+            reply_markup=get_keyboard()
         )
     except Exception as e:
         logger.error(f'Error in image processing {e}')
     finally:
         tmp_directory.cleanup()
+
+
+def clear_data(update: Update, context: CallbackContext) -> None:
+    query = update.callback_query
+    query.answer()
+
+    context.user_data.pop('product')
+
+    query.edit_message_text(
+        f'Давай попробуем другое изображение'
+    )
+
+
+def prices(update: Update, context: CallbackContext) -> None:
+    query = update.callback_query
+    query.answer()
+
+    product = context.user_data.pop('product', None)
+
+    if product is None:
+        query.edit_message_text(
+            f'Мне нечего искать'
+        )
+        return
+
+    query.edit_message_text(
+        f'Ищу цены...'
+    )
+
+    products = fetch_prices(product)
+    formatted_text = format_content(products)
+
+    query.edit_message_text(formatted_text)

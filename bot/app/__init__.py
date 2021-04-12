@@ -1,6 +1,7 @@
 import logging
 
 from telegram.ext import (
+    CallbackQueryHandler,
     CommandHandler,
     MessageHandler,
     Filters,
@@ -10,7 +11,9 @@ from telegram.ext import (
 from .commands import (
     start,
     help_reply,
-    image
+    image,
+    clear_data,
+    prices
 )
 from cfg.config import TOKEN
 
@@ -24,6 +27,8 @@ def get_bot() -> Updater:
     updater.dispatcher.add_handler(MessageHandler(Filters.photo, image))
     updater.dispatcher.add_handler(MessageHandler(Filters.all, help_reply))
     updater.dispatcher.add_handler(CommandHandler('help', help_reply))
+    updater.dispatcher.add_handler(CallbackQueryHandler(prices, pattern='^1$'))
+    updater.dispatcher.add_handler(CallbackQueryHandler(clear_data, pattern='^2$'))
 
     logger.info('Bot has been configured')
 
