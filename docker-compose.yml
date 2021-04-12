@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  bot:
+    build: ./bot
+    image: prices-ml_bot
+    container_name: bot
+    restart: always
+    networks:
+      - mynetwork
+    depends_on:
+      - api
+    env_file: .env
+
+  api:
+    build: ./prices-ws
+    image: prices-ml_api
+    container_name: api
+    restart: always
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
