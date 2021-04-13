@@ -12,7 +12,7 @@ from .types import (CLASSES, READY, BUSY)
 logger = logging.getLogger(__name__)
 
 
-def start(update: Update, context: CallbackContext) -> int:
+def start(update: Update, _: CallbackContext) -> int:
     user = update.message.from_user
     logger.info(f'User {user.first_name} started the conversation.')
 
@@ -23,7 +23,7 @@ def start(update: Update, context: CallbackContext) -> int:
     return READY
 
 
-def cancel(update: Update, context: CallbackContext) -> None:
+def cancel(update: Update, _: CallbackContext) -> None:
     user = update.message.from_user
     logger.info(f'User {user.first_name} canceled the conversation.')
 
@@ -32,7 +32,7 @@ def cancel(update: Update, context: CallbackContext) -> None:
     )
 
 
-def help_reply(update: Update, context: CallbackContext) -> None:
+def help_reply(update: Update, _: CallbackContext) -> None:
     update.message.reply_text(
         f'Просто отправь изображение.'
     )
